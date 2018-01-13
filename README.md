@@ -145,13 +145,19 @@ https://msdn.microsoft.com/zh-tw/library/ms752082(v=vs.110).aspx<br/>
 10-3 3D 基本元素<br/>
 <Viewport3D><br/>
 <Viewport3D.Camera><br/>
-            <ModelVisual3D><br/>
-                <ModelVisual3D.Content><br/>
-                    <Model3DGroup><br/>
-                        <AmbientLight Color="White"/><br/>
-                        <GeometryModel3D><br/>
+<ModelVisual3D><br/>
+<ModelVisual3D.Content><br/>
+<Model3DGroup><br/>
+<AmbientLight Color="White"/><br/>
+<GeometryModel3D><br/>
 TexttureCoordinate<br/>
 https://stackoverflow.com/questions/18776406/wpf-3d-understanding-texture-coordinates<br/>
+## Wk11. 目標: 3D(WPF)影片播放
+11-1 Video in 3D Surface <br/>
+https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/how-to-paint-an-area-with-a-video <br/>
+11-2 MouseWheel 事件(zoom)<br/>
+11-3 MouseWheel 事件(rotate)<br/>
+
 
 
 
