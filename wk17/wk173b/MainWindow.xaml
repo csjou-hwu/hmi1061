@@ -1,0 +1,16 @@
+﻿<!--1. Add Ref helixtoolkit.wpf  2.Add ViewPort3D ModelVisual3D 3. Add MainViewModel.cs PanelModelBuilder.cs 4. C# code into Constructor-->
+    <Window x:Class="wk173b.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wk173b"
+        xmlns:h="http://helixtoolkit.codeplex.com"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <h:HelixViewport3D IsHeadLightEnabled="True">
+            <ModelVisual3D Content="{Binding Model}"/>
+        </h:HelixViewport3D>
+    </Grid>
+</Window>

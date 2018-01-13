@@ -1,0 +1,7 @@
+1. Download mono
+2. Install Mono
+3. Nodepad
+4. 開啟 程式集 mono
+5.   cd C:\Users\G521\Documents\
+6.   dir
+

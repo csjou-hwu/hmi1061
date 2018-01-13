@@ -1,0 +1,16 @@
+﻿<Window x:Class="wk171.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wk171"
+        xmlns:h="http://helixtoolkit.codeplex.com"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <!--1. Add Ref, 2.Add xmlns 3. Add ViewPort3D with Headlight on 4. Add TeaPot-->
+        <h:HelixViewport3D IsHeadLightEnabled="True">
+            <h:Teapot/>
+        </h:HelixViewport3D>
+    </Grid>
+</Window>

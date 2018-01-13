@@ -1,0 +1,72 @@
+﻿<Window x:Class="wk81.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wk81"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Canvas Width="450" Height="350" >
+        <Canvas.Background>
+            <ImageBrush ImageSource="C:\Users\G521\source\repos\wk8\wk81\bin\Debug\Cloud.jpg">
+                <ImageBrush.Transform>
+                    <ScaleTransform x:Name="BST" />
+                </ImageBrush.Transform>
+            </ImageBrush>
+        </Canvas.Background>
+        <TextBox Text="下週期中考試，動畫程式一，要有故事性">
+            <TextBox.RenderTransform>
+                <ScaleTransform x:Name="TST" />
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Path>
+            <Path.RenderTransform>
+                <ScaleTransform x:Name="ST" ScaleX="2" ScaleY="2" />
+            </Path.RenderTransform>
+            <Path.Fill>
+                <ImageBrush ImageSource="C:\Users\G521\source\repos\wk8\wk81\bin\Debug\cat.jpg" />
+            </Path.Fill>
+            <Path.Data>
+                <!-- Describes an ellipse. -->
+                <EllipseGeometry x:Name="橢圓"
+             Center="200,100" RadiusX="50" RadiusY="50" />
+            </Path.Data>
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <PointAnimation Storyboard.TargetName="橢圓"
+                                            Storyboard.TargetProperty="Center"
+                                            From="200,100" To="50,50" Duration="0:0:0:1"
+                                            RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="ST"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             From="2.0" To="0.2" Duration="0:0:0:3"
+                                             RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="ST"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             From="2.0" To="0.2" Duration="0:0:0:6"
+                                             RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="BST"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             From="1" To="2" Duration="0:0:0:3"
+                                             RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="BST"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             From="1" To="2" Duration="0:0:0:3"
+                                             RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="TST"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             From="1" To="3" Duration="0:0:0:3"
+                                             RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetName="TST"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             From="1" To="3" Duration="0:0:0:3"
+                                             RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+    </Canvas>
+</Window>

@@ -1,0 +1,170 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace wk181
+{
+    /// <summary>
+    /// Window1.xaml 的互動邏輯
+    /// </summary>
+    using System.Windows.Media.Media3D;
+    /// <summary>
+    /// MainWindow.xaml 的互動邏輯
+    /// </summary>
+    public partial class Window1 : Window
+    {
+        public Window1()
+        {
+            InitializeComponent();
+            G3D.Geometry = GenMesh();
+            自我關閉計時器.Interval = new TimeSpan(0, 0, 5); // 5 Sec
+            自我關閉計時器.Tick += 自我關閉計時器_Tick;
+            this.Closing += Window1_Closing;
+            自我關閉計時器.Start();
+        }
+        System.Windows.Threading.DispatcherTimer 自我關閉計時器 = new System.Windows.Threading.DispatcherTimer();
+
+        private void 自我關閉計時器_Tick(object sender, EventArgs e)
+        {
+            自我關閉計時器.Stop();
+            this.Close();
+        }
+        private void Window1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Window2 w = new Window2();
+            w.Show();
+        }
+
+        MeshGeometry3D GenMesh()
+        {   // 00 - 01 - 02 - 03 ...
+            //    /    /
+            // 10 - 11 - 12
+            // Nx * Ny Points
+            // triangles = (Nx-1)*(Ny-1) * 2
+            int Nx = 20;
+            int Ny = 20;
+            // th = 180 ~ 0 dth = + 180/(Nx-1)
+            double th0 = -180;
+            double dth = (0 - 360.0) / (double)(Nx - 1);
+            double thy0 = -90;
+            double dthy = (90 + 90) / (double)(Ny - 1);
+            double x0 = 0.5;
+            //double R0 = 0.5;
+            Point3D[,] p3Dm2D = new Point3D[Nx, Ny];
+            for (int j = 0; j < Ny; j++)
+                for (int i = 0; i < Nx; i++)
+                {
+                    // Rectangle
+                    /* double x = 1.0 / (double)(Nx - 1) * i;
+                     double y = 1.0 / (double)(Ny - 1) * j;
+                     double z = 0; */
+                    // Cylinder
+                    double th = th0 + i * dth;
+                    double thy = thy0 + j * dthy;
+                    double y = 0.5 + R0 * Math.Sin(thy / 180 * Math.PI);
+                    double R0y = R0 * Math.Cos(thy / 180 * Math.PI);
+                    double x = x0 + R0y * Math.Cos(th / 180 * Math.PI);
+
+                    double z = R0y * Math.Sin(th / 180 * Math.PI);
+                    p3Dm2D[i, j] = new Point3D(x, y, z);
+
+                }
+            Point[,] pTexture = new Point[Nx, Ny];
+            for (int j = 0; j < Ny; j++)
+                for (int i = 0; i < Nx; i++)
+                    pTexture[i, j] = new Point(1.0 / (double)(Nx - 1) * i, 1.0 - (1.0 / (double)(Ny - 1) * j));
+            MeshGeometry3D mesh1 = new MeshGeometry3D();
+            Point3DCollection pts = new Point3DCollection();
+            for (int j = 0; j < Ny; j++)
+                for (int i = 0; i < Nx; i++)
+                {
+                    pts.Add(p3Dm2D[i, j]);
+                    using (System.IO.StreamWriter F = new System.IO.StreamWriter("out.txt"))
+                    {
+                        F.WriteLine("{0}, {1}, {2}", p3Dm2D[i, j].X, p3Dm2D[i, j].Y, p3Dm2D[i, j].Z);
+                    }
+                }
+            PointCollection tpts = new PointCollection();
+            for (int j = 0; j < Ny; j++)
+                for (int i = 0; i < Nx; i++)
+                    tpts.Add(pTexture[i, j]);
+            Int32Collection tri = new Int32Collection();
+            // (i,j)  (1)    i+1,j (2)
+            //
+            // i, j+1 (0)   i+1, j+1 (3)
+            // tri 0,1,2,2,3,1
+            for (int j = 0; j < Ny; j++)
+                for (int i = 0; i < Nx; i++)
+                {
+
+                    tri.Add(i + 1 + Nx * j); //0
+                    tri.Add(i + Nx * j);  //1
+                    tri.Add(i + Nx * (j + 1));  //2
+                    tri.Add(i + Nx * (j + 1)); //2
+                    tri.Add((i + 1) + Nx * (j + 1)); //3
+
+                    tri.Add(i + 1 + Nx * j); //0
+
+                }
+            mesh1.Positions = pts;
+            mesh1.TextureCoordinates = tpts;
+            mesh1.TriangleIndices = tri;
+
+            return mesh1;
+        }
+
+        double R0 = 0.5;
+        double th0 = 0;
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            double x, y, z;
+            // x = CAM.Position.X;
+            y = CAM.Position.Y;
+            // z = CAM.Position.Z;
+            if (e.Delta > 0)
+                th0 += 5;
+            else
+                th0 -= 5;
+            x = R0 * Math.Sin(th0 / 180 * Math.PI);
+            z = R0 * Math.Cos(th0 / 180 * Math.PI);
+            //CAM.Position = new Point3D(x, y, z);
+            CAM.Position = new Point3D(0.5, 0.5, 0);
+            CAM.LookDirection = new Vector3D(x, CAM.LookDirection.Y, z);
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                CAM.LookDirection = new Vector3D(CAM.LookDirection.X, CAM.LookDirection.Y + 0.1, CAM.LookDirection.Z);
+            }
+            if (e.Key == Key.Down)
+            {
+                CAM.LookDirection = new Vector3D(CAM.LookDirection.X, CAM.LookDirection.Y - 0.1, CAM.LookDirection.Z);
+            }
+            if (e.Key == Key.Left)
+            {
+                CAM.FieldOfView += 3;
+            }
+            if (e.Key == Key.Right)
+            {
+                CAM.FieldOfView -= 3;
+            }
+            this.Title = CAM.FieldOfView.ToString();
+
+        }
+    }
+}
+
+

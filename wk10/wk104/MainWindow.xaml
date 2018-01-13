@@ -1,0 +1,100 @@
+﻿<Window x:Class="wk104.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wk104"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+
+        <!-- Place a Label control at the top of the view. -->
+        <Label 
+				HorizontalAlignment="Center" 
+				TextBlock.TextAlignment="Center" 
+				FontSize="20" 
+				Foreground="Red" 
+				Content="Model: Cone"/>
+
+        <!-- Viewport3D is the rendering surface. -->
+        <Viewport3D Name="myViewport" >
+            <Viewport3D.Camera>
+                <PerspectiveCamera 
+						FarPlaneDistance="20" 
+						LookDirection="0,0,-1" 
+						UpDirection="0,1,0" 
+						NearPlaneDistance="1" 
+						Position="0,0,3" 
+						FieldOfView="45" />
+            </Viewport3D.Camera>
+            <Viewport3D.Children>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup >
+                            <Model3DGroup.Children>
+                                <DirectionalLight Color="#FFFFFFFF" Direction="0,0,-1" />
+                                <GeometryModel3D>
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D 
+              Positions="-1 -1 0  1 -1 0  -1 1 0  1 1 0"
+              TextureCoordinates="0.15 1  0.85  1  0 0  1 0   "
+              TriangleIndices="0 1 2  1 3 2" />
+                                    </GeometryModel3D.Geometry>
+
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <ImageBrush ImageSource="logo.jpg" />
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
+
+                                </GeometryModel3D>
+                                <GeometryModel3D>
+
+                                    <!-- The geometry specifes the shape of the 3D plane. In this sample, a flat sheet is created. -->
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D
+                     TriangleIndices="0,1,2 3,4,5 "
+                     TextureCoordinates="0,0 1,0 1,1 1,1 0,1 0,0 "
+                     Positions="-0.5,-0.5,0.5   0.5,-0.5,0.5   0.5,0.5,0.5   0.5,0.5,0.5   -0.5,0.5,0.5   -0.5,-0.5,0.5 " />
+                                    </GeometryModel3D.Geometry>
+
+                                    <!-- The material specifies the material applied to the 3D object. In this sample a linear gradient 
+                       covers the surface of the 3D object.-->
+                                    <GeometryModel3D.Material>
+                                        <MaterialGroup>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                                        <LinearGradientBrush.GradientStops>
+                                                            <GradientStop Color="Yellow" Offset="0" />
+                                                            <GradientStop Color="Red" Offset="0.25" />
+                                                            <GradientStop Color="Blue" Offset="0.75" />
+                                                            <GradientStop Color="LimeGreen" Offset="1" />
+                                                        </LinearGradientBrush.GradientStops>
+                                                    </LinearGradientBrush>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </MaterialGroup>
+                                    </GeometryModel3D.Material>
+
+                                    <!-- Apply a transform to the object. In this sample, a rotation transform is applied, rendering the 
+                       3D object rotated. -->
+                                    <GeometryModel3D.Transform>
+                                        <RotateTransform3D>
+                                            <RotateTransform3D.Rotation>
+                                                <AxisAngleRotation3D Axis="0,3,0" Angle="40" />
+                                            </RotateTransform3D.Rotation>
+                                        </RotateTransform3D>
+                                    </GeometryModel3D.Transform>
+                                </GeometryModel3D>
+                            </Model3DGroup.Children>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D.Children>
+
+        </Viewport3D>
+    </Grid>
+</Window>

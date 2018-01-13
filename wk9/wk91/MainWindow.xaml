@@ -1,0 +1,61 @@
+﻿<Window x:Class="wk91.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wk91"
+        mc:Ignorable="d" Left="0" Top="0"
+        Title="MainWindow" Height="723" Width="696">
+    <!--Ref:https://m.hujiang.com/xx/p229858/-->
+        <Canvas>
+        <Image Source="pic1.png">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="TR"/>
+                    <ScaleTransform x:Name="SC" ScaleX="2" ScaleY="2" />
+                </TransformGroup>
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SC"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             BeginTime="0:0:0:4"
+                                             From="2" To="1" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="SC"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             BeginTime="0:0:0:4"
+                                             From="2" To="1" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="X"
+                                             BeginTime="0:0:0:1"
+                                             From="0" To="-345" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="X"
+                                             BeginTime="0:0:0:2"
+                                             From="-345" To="0" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="Y"
+                                             BeginTime="0:0:0:2"
+                                             From="0" To="-345" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="X"
+                                             BeginTime="0:0:0:3"
+                                             From="0" To="-345" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="X"
+                                             BeginTime="0:0:0:4"
+                                             From="-345" To="0" Duration="0:0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetName="TR"
+                                             Storyboard.TargetProperty="Y"
+                                             BeginTime="0:0:0:4"
+                                             From="-345" To="0" Duration="0:0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+            
+        </Image>
+    </Canvas>
+</Window>
