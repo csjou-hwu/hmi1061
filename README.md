@@ -157,6 +157,82 @@ https://stackoverflow.com/questions/18776406/wpf-3d-understanding-texture-coordi
 https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/how-to-paint-an-area-with-a-video <br/>
 11-2 MouseWheel 事件(zoom)<br/>
 11-3 MouseWheel 事件(rotate)<br/>
+## Wk12. 目標: 3D MediaElement (WPF) xaml vs C#
+12-1 MediaElement in 3D Surface (Xaml vs C#)<br/>
+https://msdn.microsoft.com/zh-tw/library/ms747437(v=vs.110).aspx <br/>
+<MeshGeometry3D<br/>
+Positions="-1 -1 -1  1 -1 -1  -1 1 -1  1 1 -1" <br/>
+TextureCoordinates="1 1  0 1  1 0  0 0   "<br/>
+TriangleIndices="0 2 1  1 2 3" /><br/>
+MeshGeometry3D GenMesh()
+{   // 00 - 01 - 02 - 03 ...
+    //    /    /
+    // 10 - 11 - 12
+MeshGeometry3D mesh1 = new MeshGeometry3D();
+Point3DCollection pts = new Point3DCollection();
+PointCollection tpts = new PointCollection();
+Int32Collection tri = new Int32Collection();
+mesh1.Positions = pts;
+mesh1.TextureCoordinates = tpts;
+mesh1.TriangleIndices = tri;
+return mesh1;
+ }
+12-1-1 Download example xaml<br/>
+https://msdn.microsoft.com/zh-tw/library/ms747437(v=vs.110).aspx<br/>
+12-1-2 Download earth.jpg<br/>
+https://www.google.com.tw/search?q=NASA+Earth+images+download&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIzMuQqO_XAhXEVbwKHd8rBG0Q_AUICigB&biw=1024&bih=715&dpr=1.25#imgrc=5BUM2x2RLoza0M:<br/>
+12-1-3 Prepare xaml file<br/>
+12-1-4 copy Geometry3d to C#<br/>
+12-1-4 Prepare C# Code<br/>
+## Wk14. 目標: 全景展示
+https://en.wikipedia.org/wiki/Panorama <br/>
+14-1 MediaElement in Cylindrical Surface <br/>
+https://drive.google.com/open?id=1k_BiLwd9Ngu00FeDn1eNuei-so6F-Hhl <br/>
+改變<br/>
+Camera.Position to center (0.5,0.5,0)<br/>
+R0 = 1.8<br/>
+triangle (法向量) 1,2,3,4,5,6 =>  2,1,3,5,4,6<br/>
+Remark //R0=0.5<br/>
+14-2 Rotation animation<br/>
+https://msdn.microsoft.com/zh-TW/library/system.windows.media.media3d.axisanglerotation3d(v=vs.110).aspx<br/>
+14-3 MediaElement in Spherical Surface<br/>
+https://drive.google.com/open?id=1CwbAWid51mMqblEZdaW3bys4kYGupjzv<br/>
+## Wk15. 目標: 3D模型
+15-1.  StreetView Zoom(視角)<br/>
+https://msdn.microsoft.com/en-us/library/system.windows.media.media3d.perspectivecamera.fieldofview(v=vs.110).aspx<br/>
+15-1.1 Duplicate rectangle example<br/>
+https://msdn.microsoft.com/zh-tw/library/ms747437(v=vs.110).aspx<br/>
+15.1.1.1 Replace solidcolorbrush into visualbrush<br/>
+15.1.1.2 Mouse_Wheel event -> Rotate cam<br/>
+15.1.1.3 Key_press event -> change FieldofView<br/>
+15-2. Xaml Model<br/>
+https://www.okino.com/conv/exp_xaml2.htm<br/>
+15.2.1 Download walking robot xaml file<br/>
+15.2.2 add mouse_wheel event<br/>
+15.2.3 Add Key_down event<br/>
+15.2.4 Testing<br/>
+## Wk17. 目標: 3D模型 (外部類別庫 Helixtoolkit)
+17-1. Helixtoolkit teapot<br/>
+http://helixtoolkit.codeplex.com/<br/>
+https://github.com/helix-toolkit/helix-toolkit<br/>
+1.1 WPF<br/>
+1.2 Add Ref DLL<br/>
+1.3 xmlns:<br/>
+1.4 HelixViewPort3D<br/>
+1.5 Teapot<br/>
+17-2 FileModeVisual3D<br/>
+17-3. Polyhedron<br/>
+17.3.1 Open new PolyhedronDemo (Same name as example)<br/>
+17.3.2 Copy all classes into project<br/>
+17.3.3 Add Ref Helixtoolkit.wpf.dll<br/>
+17.3.4 nuget add PropertyTools.Wpf<br/>
+17.3.5 OK<br/>
+17.4 Cloth<br/>
+
+
+
+
+
 
 
 
